@@ -22,9 +22,9 @@ if (file_exists(__DIR__ . '/maintenance.flag')) {
 <!-- ===== NAVBAR ===== -->
 <nav class="navbar navbar-dark fixed-top" id="mainNav">
   <div class="container-fluid px-4 d-flex align-items-center justify-content-between">
-    <a class="navbar-brand p-0" href="#">
+    <!-- <a class="navbar-brand p-0" href="#">
       <img src="assets/Cairo/Arab Congress white.png" alt="Arab Congress" height="44">
-    </a>
+    </a> -->
     <div class="d-none d-md-flex align-items-center gap-3">
       <a href="mailto:arabcongress.co@gmail.com" class="nav-email">arabcongress.co@gmail.com</a>
       <a href="https://wa.me/message/56PURZNDQBU6N1" target="_blank" rel="noopener" class="btn btn-outline-light btn-sm px-3">WhatsApp</a>
