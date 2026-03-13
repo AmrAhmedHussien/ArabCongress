@@ -1,0 +1,1000 @@
+/* Arab Congress – Come To Egypt | style.css */
+
+/* CSS Variables */
+:root {
+  --amber:       #e07b30;
+  --gold:        #c8920a;
+  --dark-gold:   #a07000;
+  --cream:       #fdf5e6;
+  --dark:        #0d0600;
+  --dark-brown:  #2a1200;
+  --brown:       #5a3200;
+  --text-brown:  #3d1c00;
+}
+
+/* Reset & Base */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: var(--dark);
+  color: #fff;
+  overflow-x: hidden;
+}
+
+/* Navbar */
+#mainNav {
+  background: transparent !important;
+  transition: background 0.35s ease, box-shadow 0.35s ease;
+  padding: 10px 0;
+  z-index: 1000;
+}
+#mainNav.scrolled {
+  background: rgba(13, 6, 0, 0.97) !important;
+  box-shadow: 0 2px 24px rgba(0,0,0,0.6);
+}
+.nav-email {
+  color: rgba(255,255,255,0.8);
+  text-decoration: none;
+  font-size: 0.83rem;
+  transition: color 0.2s;
+}
+.nav-email:hover { color: var(--amber); }
+
+/* Hero Section */
+.hero-section {
+  position: relative;
+  min-height: 100vh;
+  background-image: url('../assets/Cairo/BG Home.jpg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.58);
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  width: 100%;
+  max-width: 760px;
+  padding: 110px 24px 90px;
+}
+.hero-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(2.6rem, 7vw, 4.8rem);
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 3px;
+  text-shadow: 2px 4px 16px rgba(0,0,0,0.8);
+  margin-bottom: 1.5rem;
+}
+.hero-body {
+  font-size: clamp(0.88rem, 1.8vw, 1rem);
+  color: rgba(255,255,255,0.92);
+  line-height: 1.85;
+  text-align: left;
+  max-width: 600px;
+  margin: 0 auto;
+}
+.hero-body p { margin-bottom: 0.6rem; }
+.hero-body ul { padding-left: 1.5rem; margin-bottom: 0; }
+.hero-body li { margin-bottom: 0.25rem; }
+.highlight { color: var(--amber); }
+.hero-contact {
+  margin-top: 2rem;
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.9);
+}
+.hero-contact p { margin-bottom: 0.3rem; }
+.hero-contact a { color: #fff; text-decoration: underline; transition: color 0.2s; }
+.hero-contact a:hover { color: var(--amber); }
+.hero-title-logo { text-align: center; margin: 12px 0 20px; }
+.hero-title-logo img {
+  height: 160px;
+  width: auto;
+  filter: drop-shadow(0 4px 14px rgba(0,0,0,0.7));
+}
+.hero-scroll {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  text-align: center;
+  color: rgba(255,255,255,0.6);
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  animation: fadeUp 1s ease 0.8s both;
+}
+.scroll-arrow { font-size: 1.4rem; margin-top: 4px; animation: bounce 1.6s ease infinite; }
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(8px); }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateX(-50%) translateY(16px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+/* Section Title */
+.section-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1.7rem, 4vw, 2.4rem);
+  font-weight: 700;
+  color: var(--amber);
+  letter-spacing: 3px;
+  margin-bottom: 0.5rem;
+}
+.section-title::after {
+  content: '';
+  display: block;
+  width: 70px;
+  height: 3px;
+  background: linear-gradient(to right, var(--amber), transparent);
+  margin: 10px auto 0;
+}
+
+/* Destinations Section */
+.destinations-section {
+  background: var(--dark);
+  padding: 90px 0;
+}
+.cities-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 50px;
+}
+.city-card {
+  position: relative;
+  width: 300px;
+  height: 195px;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: transform 0.32s ease, box-shadow 0.32s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.city-card:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 22px 55px rgba(200,146,10,0.35);
+}
+.city-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  transition: background 0.3s ease;
+  z-index: 1;
+}
+.city-overlay.soft { background: rgba(0,0,0,0.25); }
+.city-card:hover .city-overlay { background: rgba(0,0,0,0.3); }
+.city-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+.city-brand {
+  position: absolute;
+  bottom: 10px;
+  right: 12px;
+  z-index: 3;
+}
+.city-brand img {
+  height: 34px;
+  width: auto;
+  opacity: 0.9;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));
+}
+/* Cairo card: image-clip text */
+.cairo-card {
+  background-image: url('../assets/Cairo/BG cairo.jpg.jpg');
+  background-size: cover;
+  background-position: center;
+}
+.cairo-text {
+  position: relative;
+  z-index: 2;
+  font-family: 'Cinzel', serif;
+  font-size: clamp(3.2rem, 7vw, 4.8rem);
+  font-weight: 900;
+  letter-spacing: 12px;
+  background-image: url('../assets/Cairo/BG cairo.jpg.jpg');
+  background-size: cover;
+  background-position: center;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  line-height: 1;
+  user-select: none;
+}
+.city-hover-text {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(200, 146, 10, 0.18);
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 16px;
+  border: 2.5px solid rgba(200,146,10,0.55);
+}
+.city-card:hover .city-hover-text { opacity: 1; }
+
+/* Footer */
+.site-footer {
+  background: #050200;
+  color: rgba(255,255,255,0.65);
+  padding: 60px 0 40px;
+  border-top: 1px solid rgba(200,146,10,0.12);
+}
+.footer-logo {
+  height: 80px;
+  width: auto;
+  display: block;
+  margin: 0 auto 20px;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4));
+}
+.footer-tagline {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  color: var(--amber);
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+.footer-links p { margin-bottom: 6px; }
+.footer-links a {
+  color: rgba(255,255,255,0.75);
+  text-decoration: underline;
+  font-size: 0.9rem;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--amber); }
+.footer-mobiles { color: rgba(255,255,255,0.45); font-size: 0.87rem; margin-top: 10px; }
+.footer-copy { color: rgba(255,255,255,0.28); font-size: 0.75rem; margin-top: 30px; }
+
+/* Destination Modals (shared) */
+.dest-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  background: var(--dark);
+  overflow-y: auto;
+  overflow-x: hidden;
+  transform: translateY(100%);
+  transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+.dest-modal.open { transform: translateY(0); }
+.dest-modal-inner { min-height: 100%; }
+
+/* Close button (shared) */
+.modal-close-btn {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 9100;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.72);
+  color: #fff;
+  border: 2px solid rgba(255,255,255,0.28);
+  font-size: 1.3rem;
+  line-height: 1;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.25s ease, transform 0.25s ease;
+  backdrop-filter: blur(6px);
+}
+.dest-modal.open .modal-close-btn { display: flex; }
+.modal-close-btn:hover {
+  background: var(--amber);
+  border-color: var(--amber);
+  transform: scale(1.12);
+}
+
+/* Shared modal brand + scroll hint */
+.modal-brand {
+  position: absolute;
+  bottom: 28px;
+  right: 28px;
+  z-index: 3;
+}
+.modal-brand img {
+  height: 52px;
+  width: auto;
+  filter: drop-shadow(0 3px 10px rgba(0,0,0,0.6));
+}
+.modal-scroll-hint {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  text-align: center;
+  color: rgba(255,255,255,0.6);
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* Shared: dest-hero (full-screen image) */
+.dest-hero {
+  position: relative;
+  height: 100vh;
+  min-height: 420px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dest-hero-fullimg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Shared: dest-link */
+.dest-link { color: var(--amber); text-decoration: underline; transition: color 0.2s; }
+.dest-link:hover { color: var(--gold); }
+
+/* Cairo Modal */
+
+/* Cairo Hero (Page 2) */
+.cairo-hero {
+  position: relative;
+  height: 100vh;
+  min-height: 420px;
+  background-image: url('../assets/Cairo/BG cairo.jpg.jpg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.cairo-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.52);
+}
+.cairo-hero-text {
+  position: relative;
+  z-index: 2;
+  font-family: 'Cinzel', serif;
+  font-size: clamp(5rem, 20vw, 16rem);
+  font-weight: 900;
+  letter-spacing: clamp(8px, 2vw, 22px);
+  line-height: 1;
+  background-image: url('../assets/Cairo/BG cairo.jpg.jpg');
+  background-size: cover;
+  background-position: center;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: none;
+  user-select: none;
+}
+
+/* Cairo Info (Page 3) */
+.cairo-info-section {
+  background: var(--cream);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cairo-info-body {
+  width: 100%;
+  max-width: 700px;
+  padding: 70px 40px 60px;
+}
+.cairo-section-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  font-weight: 900;
+  letter-spacing: 8px;
+  background-image: url('../assets/Cairo/BG cairo.jpg.jpg');
+  background-size: cover;
+  background-position: center;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  line-height: 1.1;
+  margin-bottom: 1.4rem;
+  text-align: center;
+}
+.cairo-intro {
+  color: var(--text-brown);
+  font-size: clamp(0.88rem, 1.8vw, 1rem);
+  line-height: 1.8;
+  font-weight: 600;
+  text-align: center;
+  max-width: 580px;
+  margin: 0 auto 1.8rem;
+}
+.cairo-list {
+  list-style: none;
+  padding: 0;
+  max-width: 520px;
+  margin: 0 auto 1.5rem;
+  counter-reset: cairo-counter;
+}
+.cairo-list li {
+  counter-increment: cairo-counter;
+  padding: 7px 0 7px 8px;
+  font-weight: 700;
+  color: var(--amber);
+  font-size: clamp(0.88rem, 1.8vw, 1rem);
+  border-bottom: 1px solid rgba(200,146,10,0.18);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.cairo-list li::before {
+  content: counter(cairo-counter) '.';
+  color: var(--text-brown);
+  font-weight: 700;
+  min-width: 22px;
+}
+.cairo-contact-line {
+  color: var(--text-brown);
+  font-size: 0.93rem;
+  margin-top: 1.2rem;
+}
+
+/* Cairo Photos (Pages 4 & 5) */
+.cairo-photos-section { background: var(--cream); }
+.cairo-photos-section.alt-bg { background: #f9edd7; }
+.cairo-photos-body {
+  padding: 50px 60px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+/* Photo Grid (shared) */
+.photos-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.photo-card {
+  display: flex;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 6px 22px rgba(0,0,0,0.22);
+  height: 210px;
+  transition: box-shadow 0.3s ease;
+}
+.photo-card:hover { box-shadow: 0 10px 32px rgba(0,0,0,0.32); }
+
+/* Vertical label sidebar */
+.photo-label {
+  width: 38px;
+  min-width: 38px;
+  background: rgba(20, 8, 0, 0.82);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  z-index: 2;
+}
+.photo-label span {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.photo-card img {
+  flex: 1;
+  min-width: 0;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+.photo-card:hover img { transform: scale(1.05); }
+
+/* Hotels Block (shared) */
+.hotels-block {
+  margin-top: 30px;
+  display: flex;
+  align-items: flex-start;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+.hotels-block.inline { margin-top: 20px; }
+.hotels-heading { min-width: 110px; }
+.hotels-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-brown);
+  line-height: 1;
+  margin-bottom: 2px;
+}
+.hotels-sub {
+  font-size: 0.65rem;
+  letter-spacing: 2px;
+  color: rgba(61,28,0,0.6);
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.hotels-list {
+  list-style: none;
+  padding: 0;
+  flex: 1;
+}
+.hotels-list li {
+  padding: 5px 0;
+  color: var(--text-brown);
+  font-size: 0.93rem;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(200,146,10,0.15);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.hotels-list li::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--amber);
+  flex-shrink: 0;
+}
+
+/* Modal Booking Form Section (shared) */
+.modal-form-section {
+  background: linear-gradient(160deg, #1a0a00 0%, #2d1400 50%, #1a0a00 100%);
+  padding: 80px 0 90px;
+}
+.form-sub {
+  color: rgba(255,255,255,0.5);
+  font-size: 0.93rem;
+  margin-top: 8px;
+  margin-bottom: 40px;
+}
+.form-card {
+  background: rgba(255,255,255,0.045);
+  border: 1px solid rgba(200,146,10,0.22);
+  border-radius: 22px;
+  padding: 44px 40px;
+  backdrop-filter: blur(10px);
+}
+.form-label {
+  color: rgba(255,255,255,0.82);
+  font-size: 0.87rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-bottom: 7px;
+  display: block;
+}
+.required { color: var(--amber); }
+.booking-input {
+  background: rgba(255,255,255,0.07) !important;
+  border: 1.5px solid rgba(200,146,10,0.3) !important;
+  color: #fff !important;
+  border-radius: 9px !important;
+  padding: 11px 16px !important;
+  font-size: 0.93rem !important;
+  transition: border-color 0.28s ease, box-shadow 0.28s ease, background 0.28s ease !important;
+  width: 100%;
+}
+.booking-input::placeholder { color: rgba(255,255,255,0.32) !important; }
+.booking-input option { background: #2a1200; color: #fff; }
+.booking-input:focus {
+  border-color: var(--amber) !important;
+  box-shadow: 0 0 0 3px rgba(224,123,48,0.2) !important;
+  background: rgba(255,255,255,0.1) !important;
+  outline: none !important;
+}
+.booking-input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1) opacity(0.6); cursor: pointer; }
+textarea.booking-input { resize: vertical; min-height: 100px; }
+.btn-submit {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--amber) 0%, var(--gold) 100%);
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  padding: 14px 48px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.btn-submit:hover {
+  background: linear-gradient(135deg, var(--gold) 0%, var(--dark-gold) 100%);
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(200,146,10,0.42);
+}
+.btn-submit:active { transform: translateY(0); }
+.btn-submit:disabled { opacity: 0.65; cursor: not-allowed; }
+.form-msg { font-size: 0.93rem; border-radius: 10px; }
+
+/* Alexandria Modal */
+.dest-content-section {
+  display: flex;
+  min-height: 80vh;
+}
+.dest-content-section.cream-bg { background: var(--cream); }
+
+/* Vertical city strip (like Alex left panel in Page 7) */
+.city-strip {
+  width: 62px;
+  min-width: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.alex-strip {
+  background: linear-gradient(180deg, #00274d 0%, #003a6e 50%, #00274d 100%);
+}
+.city-strip-text {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: 'Cinzel', serif;
+  font-weight: 900;
+  font-size: clamp(1rem, 2.5vw, 1.4rem);
+  letter-spacing: 6px;
+  color: rgba(255,255,255,0.85);
+  text-transform: uppercase;
+  user-select: none;
+  white-space: nowrap;
+}
+.dest-content-body {
+  flex: 1;
+  padding: 50px 55px 50px 40px;
+}
+
+/* Coastal Gems Modal */
+.coastal-dest-section {
+  display: flex;
+  align-items: stretch;
+  background: var(--cream);
+  border-bottom: 2px solid rgba(200,146,10,0.12);
+}
+.coastal-dest-section.alt { background: #f9edd7; flex-direction: row-reverse; }
+.coastal-dest-img-wrap {
+  flex: 1.4;
+  min-height: 380px;
+  overflow: hidden;
+}
+.coastal-dest-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.coastal-dest-info {
+  flex: 1;
+  padding: 45px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.coastal-dest-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 700;
+  color: var(--text-brown);
+  letter-spacing: 2px;
+  margin-bottom: 6px;
+}
+.coastal-dest-sub {
+  color: rgba(61,28,0,0.65);
+  font-size: 0.88rem;
+  font-style: italic;
+  margin-bottom: 0;
+}
+
+/* Luxor & Aswan Modal */
+
+/* Split-screen title hero (Page 13) */
+.la-hero {
+  position: relative;
+  height: 100vh;
+  min-height: 420px;
+  display: flex;
+  overflow: hidden;
+}
+.la-half {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.luxor-half {
+  background-image: url('../assets/LUXOR/Hot Air Balloon Ride.jpg');
+  background-size: cover;
+  background-position: center;
+}
+.aswan-half {
+  background-image: url('../assets/Aswan/Nubian Village.jpg');
+  background-size: cover;
+  background-position: center;
+}
+.la-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+}
+/* Shared title base */
+.la-title {
+  position: relative;
+  z-index: 2;
+  font-family: 'Cinzel', serif;
+  font-size: clamp(3rem, 10vw, 9rem);
+  font-weight: 900;
+  letter-spacing: clamp(4px, 1.5vw, 14px);
+  line-height: 1;
+  user-select: none;
+}
+/* LUXOR: image-clip text (photo shows through letters) */
+.luxor-title {
+  background-image: url('../assets/LUXOR/Hot Air Balloon Ride.jpg');
+  background-size: cover;
+  background-position: center;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: none;
+}
+/* ASWAN: image-clip text */
+.aswan-title {
+  background-image: url('../assets/Aswan/Nubian Village.jpg');
+  background-size: cover;
+  background-position: center;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: none;
+}
+.la-brand {
+  position: absolute;
+  bottom: 28px;
+  right: 28px;
+  z-index: 3;
+}
+
+/* Two-column content (Page 14) */
+.la-content-section {
+  background: #f5e3b8;  /* parchment-like tone matching PDF */
+}
+.la-columns {
+  display: flex;
+}
+.la-col {
+  flex: 1;
+  padding: 50px 40px;
+}
+.luxor-col { border-right: 2px solid rgba(200,146,10,0.25); }
+.la-col-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 900;
+  color: var(--text-brown);
+  letter-spacing: 4px;
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+/* City Button Cards – image-clip text effect */
+
+/* Alexandria button */
+.alex-btn-card {
+  background-image: url('../assets/ALEX/Stanley Bridge.jpg.jpg');
+  background-size: cover;
+  background-position: center;
+}
+.alex-clip-text {
+  position: relative;
+  z-index: 2;
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1.4rem, 3.5vw, 2rem);
+  font-weight: 900;
+  letter-spacing: 6px;
+  background-image: url('../assets/ALEX/Stanley Bridge.jpg.jpg');
+  background-size: cover;
+  background-position: center;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  line-height: 1;
+  user-select: none;
+  white-space: nowrap;
+}
+
+/* Coastal Gems button */
+.coastal-btn-card {
+  background: #0a1a2a;   /* dark fallback while image loads */
+}
+
+/* Luxor & Aswan button */
+.la-btn-card {
+  background-image: url('../assets/LUXOR/Hot Air Balloon Ride.jpg');
+  background-size: cover;
+  background-position: center;
+}
+.la-clip-text {
+  position: relative;
+  z-index: 2;
+  font-family: 'Cinzel', serif;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 900;
+  letter-spacing: 8px;
+  line-height: 1.15;
+  text-align: center;
+  background-image: url('../assets/LUXOR/Hot Air Balloon Ride.jpg');
+  background-size: cover;
+  background-position: center;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  user-select: none;
+}
+
+/* Responsive */
+
+/* 992px and below */
+@media (max-width: 992px) {
+  .hero-section { background-attachment: scroll; }
+  .cities-row { gap: 16px; }
+  .city-card { width: 260px; height: 175px; }
+  .cairo-photos-body { padding: 40px 30px; }
+  .la-col { padding: 40px 25px; }
+  .dest-content-body { padding: 40px 30px; }
+  /* Coastal: stack at 992px too so info isn't squeezed */
+  .coastal-dest-section { flex-direction: column !important; }
+  .coastal-dest-img-wrap { min-height: 260px; flex: none; max-height: 340px; }
+}
+
+/* 768px and below */
+@media (max-width: 768px) {
+  /* Hero */
+  .hero-content { padding: 90px 20px 70px; }
+  .hero-title { letter-spacing: 2px; }
+  .hero-title-logo img { height: 110px; }
+  .hero-body { text-align: center; }
+  .hero-contact { font-size: 0.88rem; word-break: break-word; overflow-wrap: break-word; }
+  .hero-scroll { display: none; }
+
+  /* City cards */
+  .cities-row { flex-direction: column; align-items: center; gap: 14px; }
+  .city-card { width: min(360px, 92vw); height: 200px; }
+  .cairo-text { font-size: clamp(2.6rem, 12vw, 4rem); letter-spacing: 6px; }
+  .alex-clip-text { font-size: clamp(1.2rem, 6vw, 1.8rem); letter-spacing: 4px; }
+  .la-clip-text { font-size: clamp(1.6rem, 8vw, 2.4rem); letter-spacing: 5px; }
+
+  /* Modal shared */
+  .modal-close-btn { top: 12px; right: 12px; width: 44px; height: 44px; font-size: 1.1rem; }
+  .modal-scroll-hint { display: none; }
+  .modal-brand img { height: 40px; }
+  .modal-brand { bottom: 16px; right: 16px; }
+
+  /* Cairo hero */
+  .cairo-hero-text { font-size: clamp(3.2rem, 18vw, 8rem); letter-spacing: clamp(2px, 1vw, 8px); }
+
+  /* Cairo info */
+  .cairo-info-section { min-height: unset; padding: 50px 0; }
+  .cairo-info-body { padding: 0 20px; }
+  .cairo-section-title { font-size: clamp(2rem, 10vw, 3.5rem); letter-spacing: 4px; }
+  .cairo-intro { text-align: left; font-size: 0.9rem; }
+  .cairo-intro br { display: none; }
+
+  /* Photo grids */
+  .cairo-photos-body { padding: 28px 16px; }
+  .photos-grid { grid-template-columns: 1fr; gap: 12px; }
+  .photo-card { height: 190px; }
+  .photo-label { width: 34px; min-width: 34px; }
+  .photo-label span { font-size: 0.62rem; letter-spacing: 2px; }
+
+  /* Hotels block */
+  .hotels-block { flex-direction: column; gap: 10px; }
+  .hotels-heading { min-width: unset; }
+
+  /* Alexandria strip — convert to top banner */
+  .dest-content-section { flex-direction: column !important; min-height: unset; }
+  .city-strip {
+    width: 100% !important;
+    min-width: unset !important;
+    height: 44px;
+    min-height: unset;
+    flex-direction: row;
+  }
+  .city-strip-text {
+    writing-mode: horizontal-tb;
+    transform: none;
+    font-size: 0.9rem;
+    letter-spacing: 5px;
+  }
+  .dest-content-body { padding: 28px 20px; }
+
+  /* Coastal */
+  .coastal-dest-img-wrap { min-height: 220px; max-height: 280px; }
+  .coastal-dest-info { padding: 24px 20px; }
+
+  /* Luxor & Aswan hero — stack vertically */
+  .la-hero { flex-direction: column; height: auto; min-height: unset; }
+  .la-half { min-height: 45vh; flex: none; width: 100%; }
+  .la-title { font-size: clamp(2.8rem, 14vw, 5rem); letter-spacing: clamp(3px, 1vw, 10px); }
+  .la-brand { bottom: 16px; right: 16px; }
+
+  /* Luxor & Aswan content */
+  .la-columns { flex-direction: column; }
+  .luxor-col { border-right: none; border-bottom: 2px solid rgba(200,146,10,0.25); }
+  .la-col { padding: 32px 20px; }
+  .la-col-title { letter-spacing: 2px; margin-bottom: 20px; }
+
+  /* Form */
+  .modal-form-section { padding: 50px 0 60px; }
+  .form-card { padding: 24px 16px; }
+  .btn-submit { width: 100%; padding: 14px 24px; }
+
+  /* Footer */
+  .footer-logo { height: 60px; }
+  .footer-links a { word-break: break-all; font-size: 0.83rem; }
+  .footer-mobiles { font-size: 0.8rem; }
+}
+
+/* 480px and below */
+@media (max-width: 480px) {
+  /* Hero */
+  .hero-content { padding: 80px 16px 60px; }
+  .hero-title-logo img { height: 90px; }
+  .hero-body { font-size: 0.87rem; }
+
+  /* City cards */
+  .city-card { width: min(340px, 94vw); height: 185px; }
+
+  /* Cairo hero */
+  .cairo-hero-text { font-size: clamp(2.8rem, 18vw, 6rem); letter-spacing: 2px; }
+
+  /* Cairo info */
+  .cairo-section-title { font-size: clamp(1.8rem, 10vw, 2.8rem); letter-spacing: 2px; }
+
+  /* Photos */
+  .photo-card { height: 170px; }
+
+  /* Luxor & Aswan */
+  .la-half { min-height: 38vh; }
+  .la-title { font-size: clamp(2.2rem, 14vw, 4rem); letter-spacing: 2px; }
+}
