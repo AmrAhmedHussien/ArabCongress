@@ -245,11 +245,11 @@ $siteOnline = !file_exists(__DIR__ . '/../maintenance.flag');
 <nav class="ac-navbar d-flex align-items-center justify-content-between">
     <div class="brand">Arab <span>Congress</span> &mdash; Admin</div>
     <div class="d-flex align-items-center gap-3">
-        <!-- <?php if ($siteOnline): ?>
+        <?php if ($siteOnline): ?>
             <a href="site-off.php" class="nav-link-logout" style="color:#f87171;" onclick="return confirm('Take the website offline?')">&#9632; Take Offline</a>
         <?php else: ?>
             <a href="site-on.php" class="nav-link-logout" style="color:#4ade80;">&#9654; Bring Online</a>
-        <?php endif; ?> -->
+        <?php endif; ?>
     <a href="logout.php" class="nav-link-logout">
         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16" style="margin-right:4px;vertical-align:-1px">
             <path fill-rule="evenodd" d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0v-2z"/>

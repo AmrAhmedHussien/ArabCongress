@@ -45,10 +45,9 @@ body {
 .hero-section {
   position: relative;
   min-height: 100vh;
-  background-image: url('../assets/Cairo/BG Home.jpg.jpg');
+  background-image: url('../assets/Cairo/bg-home.jpg');
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -876,8 +875,7 @@ textarea.booking-input { resize: vertical; min-height: 100px; }
 
 /* 992px and below */
 @media (max-width: 992px) {
-  .hero-section { background-attachment: scroll; }
-  .cities-row { gap: 16px; }
+.cities-row { gap: 16px; }
   .city-card { width: 260px; height: 175px; }
   .cairo-photos-body { padding: 40px 30px; }
   .la-col { padding: 40px 25px; }
