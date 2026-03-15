@@ -15,6 +15,8 @@ const MODALS = {
   alex:        document.getElementById('alexModal'),
   coastal:     document.getElementById('coastalModal'),
   luxorAswan:  document.getElementById('luxorAswanModal'),
+  spouses:     document.getElementById('spousesModal'),
+  conference:  document.getElementById('conferenceModal'),
 };
 
 function openModal(key) {
@@ -48,35 +50,58 @@ document.querySelectorAll('.dest-booking-form').forEach(function (form) {
   });
 });
 
+// Conference tour: sync selected option to destination hidden field
+document.querySelectorAll('input[name="conf_tour_option"]').forEach(function(radio) {
+  radio.addEventListener('change', function() {
+    var form = document.getElementById('conferenceForm');
+    var destField = form ? form.querySelector('[name="destination"]') : null;
+    if (destField) destField.value = radio.value;
+  });
+});
+
 function handleBookingSubmit(form) {
   var submitBtn  = form.querySelector('.btn-submit');
   var btnLabel   = form.querySelector('.btn-label');
   var btnSpinner = form.querySelector('.btn-spinner');
   var msgDiv     = form.closest('.form-card').querySelector('.form-msg');
+  var formType   = form.getAttribute('data-form-type') || 'ordinary';
 
-  // --- Client-side validation ---
-  var destination = (form.querySelector('[name="destination"]') || {}).value || '';
-  var full_name   = (form.querySelector('[name="full_name"]') || {}).value || '';
-  var mobile      = (form.querySelector('[name="mobile"]') || {}).value || '';
-  var email       = (form.querySelector('[name="email"]') || {}).value || '';
-  var date        = (form.querySelector('[name="date"]') || {}).value || '';
+  var full_name = ((form.querySelector('[name="full_name"]') || {}).value || '').trim();
+  var mobile    = ((form.querySelector('[name="mobile"]')    || {}).value || '').trim();
+  var email     = ((form.querySelector('[name="email"]')     || {}).value || '').trim();
+  var date      = ((form.querySelector('[name="date"]')      || {}).value || '').trim();
 
-  full_name = full_name.trim();
-  mobile    = mobile.trim();
-  email     = email.trim();
-  date      = date.trim();
-  destination = destination.trim();
-
-  if (!destination || !full_name || !mobile || !email || !date) {
-    showMsg(msgDiv, 'error', 'Please fill in all required fields.');
-    return;
+  if (formType === 'conference') {
+    // Radios are outside the form element (form= attribute), so query document
+    var selectedRadio = document.querySelector('input[name="conf_tour_option"]:checked');
+    if (!selectedRadio) {
+      showMsg(msgDiv, 'error', 'Please select one tour option before submitting.');
+      return;
+    }
+    var destField = form.querySelector('[name="destination"]');
+    if (destField) destField.value = selectedRadio.value;
+    if (!full_name || !mobile || !email) {
+      showMsg(msgDiv, 'error', 'Please fill in all required fields.');
+      return;
+    }
+  } else if (formType === 'spouses') {
+    if (!full_name || !mobile || !email) {
+      showMsg(msgDiv, 'error', 'Please fill in all required fields.');
+      return;
+    }
+  } else {
+    var destination = ((form.querySelector('[name="destination"]') || {}).value || '').trim();
+    if (!destination || !full_name || !mobile || !email || !date) {
+      showMsg(msgDiv, 'error', 'Please fill in all required fields.');
+      return;
+    }
   }
+
   if (!isValidEmail(email)) {
     showMsg(msgDiv, 'error', 'Please enter a valid email address.');
     return;
   }
 
-  // --- Loading state ---
   btnLabel.classList.add('d-none');
   btnSpinner.classList.remove('d-none');
   submitBtn.disabled = true;
@@ -86,11 +111,11 @@ function handleBookingSubmit(form) {
     method: 'POST',
     body: new FormData(form),
   })
-    .then(function (res) {
+    .then(function(res) {
       if (!res.ok) throw new Error('Network error');
       return res.json();
     })
-    .then(function (data) {
+    .then(function(data) {
       if (data.success) {
         showMsg(msgDiv, 'success', data.message || 'Booking submitted successfully!');
         form.reset();
@@ -98,10 +123,10 @@ function handleBookingSubmit(form) {
         showMsg(msgDiv, 'error', data.message || 'Something went wrong. Please try again.');
       }
     })
-    .catch(function () {
+    .catch(function() {
       showMsg(msgDiv, 'error', 'Connection error. Please contact us directly at arabcongress.co@gmail.com');
     })
-    .finally(function () {
+    .finally(function() {
       btnLabel.classList.remove('d-none');
       btnSpinner.classList.add('d-none');
       submitBtn.disabled = false;

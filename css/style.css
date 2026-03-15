@@ -996,3 +996,87 @@ textarea.booking-input { resize: vertical; min-height: 100px; }
   .la-half { min-height: 38vh; }
   .la-title { font-size: clamp(2.2rem, 14vw, 4rem); letter-spacing: 2px; }
 }
+
+/* ============================================================
+   Special tour button cards
+   ============================================================ */
+.special-card .city-overlay { background: rgba(0,0,0,0.6); }
+.spouses-card { background-image: url('../assets/Cairo/Nile River.jpg'); background-size: cover; background-position: center; }
+.conference-card { background-image: url('../assets/Cairo/Pyramids.webp'); background-size: cover; background-position: center; }
+.special-card-inner { position: relative; z-index: 2; text-align: center; }
+.special-card-label { display: block; font-size: 0.55rem; letter-spacing: 3px; text-transform: uppercase; color: var(--amber); font-weight: 700; margin-bottom: 6px; }
+.special-card-title { font-family: 'Cinzel', serif; font-size: clamp(1rem, 2.8vw, 1.35rem); font-weight: 900; color: #fff; letter-spacing: 2px; line-height: 1.25; text-transform: uppercase; text-shadow: 0 2px 8px rgba(0,0,0,0.6); }
+.special-card-sub { font-size: 0.6rem; letter-spacing: 3px; color: rgba(255,255,255,0.75); margin-top: 6px; text-transform: uppercase; }
+
+/* Spouses / Conference hero */
+.spouses-hero, .conference-hero {
+  position: relative; height: 60vh; min-height: 340px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  overflow: hidden; text-align: center;
+}
+.spouses-hero { background-image: url('../assets/Cairo/Nile River.jpg'); background-size: cover; background-position: center; }
+.conference-hero { background-image: url('../assets/Cairo/Pyramids.webp'); background-size: cover; background-position: center; }
+.special-hero-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.58); }
+.special-hero-title {
+  position: relative; z-index: 2;
+  font-family: 'Cinzel', serif; font-size: clamp(2rem, 7vw, 5rem);
+  font-weight: 900; color: #fff; letter-spacing: clamp(4px, 1.5vw, 14px);
+  line-height: 1; text-shadow: 0 4px 20px rgba(0,0,0,0.6);
+}
+.special-hero-sub {
+  position: relative; z-index: 2;
+  font-family: 'Cinzel', serif; font-size: clamp(0.9rem, 2vw, 1.3rem);
+  color: var(--amber); letter-spacing: 5px; margin-top: 12px; text-transform: uppercase;
+}
+
+/* Tour selection cards (Spouses) */
+.tour-select-section { background: var(--cream); padding: 60px 40px; }
+.tour-select-heading { font-family: 'Cinzel', serif; font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; color: var(--amber); letter-spacing: 3px; margin-bottom: 8px; }
+.tour-select-note { color: var(--text-brown); font-size: 0.9rem; font-style: italic; margin-bottom: 32px; }
+.tour-cards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 860px; margin: 0 auto; }
+.tour-select-card {
+  background: #fff; border-radius: 14px; padding: 20px 22px;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.08); border: 2px solid transparent;
+  display: flex; align-items: flex-start; gap: 16px; cursor: pointer;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+.tour-select-card:hover { border-color: var(--amber); box-shadow: 0 6px 24px rgba(200,146,10,0.18); }
+.tour-select-card.mandatory { border-color: rgba(200,146,10,0.4); background: #fffbf0; }
+.tour-select-card-body { flex: 1; }
+.tour-date-badge { display: inline-block; background: var(--amber); color: #fff; font-size: 0.68rem; font-weight: 700; letter-spacing: 2px; padding: 3px 10px; border-radius: 20px; text-transform: uppercase; margin-bottom: 8px; }
+.tour-name { font-family: 'Cinzel', serif; font-size: 0.97rem; font-weight: 700; color: var(--text-brown); margin-bottom: 4px; }
+.tour-desc { font-size: 0.83rem; color: rgba(61,28,0,0.65); font-style: italic; }
+.tour-mandatory-badge { font-size: 0.65rem; color: var(--amber); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; display: block; margin-top: 6px; }
+.tour-checkbox { margin-top: 2px; width: 18px; height: 18px; accent-color: var(--amber); flex-shrink: 0; }
+
+/* Conference option cards */
+.conf-options-section { background: var(--cream); padding: 60px 40px; }
+.conf-options-heading { font-family: 'Cinzel', serif; font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; color: var(--amber); letter-spacing: 3px; margin-bottom: 8px; }
+.conf-options-note { background: rgba(200,146,10,0.12); border-left: 4px solid var(--amber); padding: 10px 16px; border-radius: 0 8px 8px 0; font-size: 0.9rem; color: var(--text-brown); font-weight: 600; margin-bottom: 32px; max-width: 600px; }
+.conf-options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 860px; margin: 0 auto; }
+.conf-option-card {
+  background: #fff; border-radius: 14px; overflow: hidden;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.08); border: 3px solid transparent;
+  cursor: pointer; transition: border-color 0.25s, box-shadow 0.25s;
+}
+.conf-option-card:has(input:checked) { border-color: var(--amber); box-shadow: 0 8px 28px rgba(200,146,10,0.25); }
+.conf-option-img { width: 100%; height: 160px; object-fit: cover; display: block; }
+.conf-option-body { padding: 18px 20px; }
+.conf-option-title { font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 700; color: var(--text-brown); margin-bottom: 8px; }
+.conf-time-badge { display: inline-block; background: var(--dark); color: var(--amber); font-size: 0.7rem; font-weight: 700; letter-spacing: 1px; padding: 3px 10px; border-radius: 20px; margin-bottom: 10px; }
+.conf-option-desc { font-size: 0.83rem; color: rgba(61,28,0,0.65); line-height: 1.5; margin-bottom: 12px; }
+.conf-option-radio-row { display: flex; align-items: center; gap: 8px; }
+.conf-option-radio-row input[type="radio"] { width: 18px; height: 18px; accent-color: var(--amber); }
+.conf-option-radio-row label { font-size: 0.83rem; font-weight: 600; color: var(--text-brown); cursor: pointer; }
+
+/* Responsive for new sections */
+@media (max-width: 768px) {
+  .tour-cards-grid { grid-template-columns: 1fr; }
+  .conf-options-grid { grid-template-columns: 1fr; }
+  .tour-select-section { padding: 40px 20px; }
+  .conf-options-section { padding: 40px 20px; }
+  .spouses-hero, .conference-hero { height: 50vh; }
+}
+@media (max-width: 480px) {
+  .special-card-title { font-size: clamp(0.9rem, 5vw, 1.1rem); }
+}

@@ -20,8 +20,12 @@ try {
     die('<p style="color:red;font-family:monospace;padding:2rem;">Database connection failed.</p>');
 }
 
-// Fetch all bookings
-$stmt     = $pdo->query('SELECT * FROM bookings ORDER BY created_at DESC');
+// Fetch all bookings (gracefully handle older tables missing new columns)
+try {
+    $stmt = $pdo->query('SELECT * FROM bookings ORDER BY created_at DESC');
+} catch (PDOException $e) {
+    $stmt = $pdo->query('SELECT id, full_name, mobile, email, booking_date, destination, notes, created_at, NULL AS type, NULL AS selected_tours FROM bookings ORDER BY created_at DESC');
+}
 $bookings = $stmt->fetchAll();
 $total    = count($bookings);
 
@@ -237,6 +241,26 @@ $siteOnline = !file_exists(__DIR__ . '/../maintenance.flag');
             border-radius: 4px;
             font-weight: 600;
         }
+
+        /* ---- Booking type badges ---- */
+        .badge-type {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 0.22rem 0.6rem;
+            border-radius: 20px;
+            white-space: nowrap;
+            letter-spacing: 0.3px;
+        }
+        .badge-type-spouses {
+            background: #fff3e0;
+            color: #e07b30;
+            border: 1px solid #e07b30;
+        }
+        .badge-type-conference {
+            background: #1a1a1a;
+            color: #e07b30;
+        }
     </style>
 </head>
 <body>
@@ -318,6 +342,7 @@ $siteOnline = !file_exists(__DIR__ . '/../maintenance.flag');
                         <th>Mobile</th>
                         <th>Email</th>
                         <th>Destination</th>
+                        <th>Type</th>
                         <th>Booking Date</th>
                         <th>Submitted At</th>
                         <th class="pe-3">Actions</th>
@@ -326,14 +351,25 @@ $siteOnline = !file_exists(__DIR__ . '/../maintenance.flag');
                 <tbody>
                     <?php foreach ($bookings as $b): ?>
                     <?php
-                        $id          = (int) $b['id'];
-                        $fullName    = htmlspecialchars($b['full_name'],    ENT_QUOTES, 'UTF-8');
-                        $mobile      = htmlspecialchars($b['mobile'],       ENT_QUOTES, 'UTF-8');
-                        $email       = htmlspecialchars($b['email'],        ENT_QUOTES, 'UTF-8');
-                        $destination = htmlspecialchars($b['destination'],  ENT_QUOTES, 'UTF-8');
-                        $bookDate    = htmlspecialchars($b['booking_date'], ENT_QUOTES, 'UTF-8');
-                        $notes       = htmlspecialchars($b['notes'] ?? '',  ENT_QUOTES, 'UTF-8');
-                        $createdAt   = htmlspecialchars($b['created_at'],   ENT_QUOTES, 'UTF-8');
+                        $id             = (int) $b['id'];
+                        $fullName       = htmlspecialchars($b['full_name'],       ENT_QUOTES, 'UTF-8');
+                        $mobile         = htmlspecialchars($b['mobile'],          ENT_QUOTES, 'UTF-8');
+                        $email          = htmlspecialchars($b['email'],           ENT_QUOTES, 'UTF-8');
+                        $destination    = htmlspecialchars($b['destination'],     ENT_QUOTES, 'UTF-8');
+                        $bookDate       = htmlspecialchars($b['booking_date'],    ENT_QUOTES, 'UTF-8');
+                        $notes          = htmlspecialchars($b['notes'] ?? '',     ENT_QUOTES, 'UTF-8');
+                        $createdAt      = htmlspecialchars($b['created_at'],      ENT_QUOTES, 'UTF-8');
+                        $bookingType    = $b['type'] ?? 'ordinary';
+                        $selectedTours  = htmlspecialchars($b['selected_tours'] ?? '', ENT_QUOTES, 'UTF-8');
+
+                        // Type badge HTML
+                        if ($bookingType === 'spouses_program') {
+                            $typeBadge = '<span class="badge-type badge-type-spouses">Spouses</span>';
+                        } elseif ($bookingType === 'conference_tour') {
+                            $typeBadge = '<span class="badge-type badge-type-conference">Conference</span>';
+                        } else {
+                            $typeBadge = '';
+                        }
                     ?>
                     <tr>
                         <td class="ps-3"><span class="badge-id"><?= $id ?></span></td>
@@ -341,6 +377,7 @@ $siteOnline = !file_exists(__DIR__ . '/../maintenance.flag');
                         <td><?= $mobile ?></td>
                         <td style="max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"><?= $email ?></td>
                         <td><?= $destination ?></td>
+                        <td><?= $typeBadge ?></td>
                         <td><?= $bookDate ?></td>
                         <td style="white-space:nowrap;"><?= $createdAt ?></td>
                         <td class="pe-3">
@@ -357,6 +394,8 @@ $siteOnline = !file_exists(__DIR__ . '/../maintenance.flag');
                                     data-bookdate="<?= $bookDate ?>"
                                     data-notes="<?= $notes ?>"
                                     data-createdat="<?= $createdAt ?>"
+                                    data-type="<?= htmlspecialchars($bookingType, ENT_QUOTES, 'UTF-8') ?>"
+                                    data-selectedtours="<?= $selectedTours ?>"
                                 >
                                     View
                                 </button>
@@ -404,10 +443,18 @@ $siteOnline = !file_exists(__DIR__ . '/../maintenance.flag');
                     <span class="detail-value" id="modal-destination"></span>
                 </div>
                 <div class="detail-row">
+                    <span class="detail-label">Type</span>
+                    <span class="detail-value" id="modal-type"></span>
+                </div>
+                <div class="detail-row">
                     <span class="detail-label">Booking Date</span>
                     <span class="detail-value" id="modal-bookdate"></span>
                 </div>
                 <div class="detail-divider"></div>
+                <div class="detail-row" id="modal-tours-row" style="display:none;">
+                    <span class="detail-label">Selected Tours</span>
+                    <span class="detail-value" id="modal-selectedtours" style="white-space:pre-line;"></span>
+                </div>
                 <div class="detail-row">
                     <span class="detail-label">Notes</span>
                     <span class="detail-value" id="modal-notes" style="font-style:italic;color:#666;"></span>
@@ -433,6 +480,12 @@ $siteOnline = !file_exists(__DIR__ . '/../maintenance.flag');
     const modal      = new bootstrap.Modal(document.getElementById('bookingModal'));
     const viewBtns   = document.querySelectorAll('.btn-open-modal');
 
+    const typeLabels = {
+        'ordinary':        'Regular Tour',
+        'spouses_program': 'Spouses & Partners Program',
+        'conference_tour': 'Conference Tour (Oct. 9)',
+    };
+
     viewBtns.forEach(function (btn) {
         btn.addEventListener('click', function () {
             document.getElementById('modal-id').textContent          = '#' + btn.dataset.id;
@@ -443,6 +496,21 @@ $siteOnline = !file_exists(__DIR__ . '/../maintenance.flag');
             document.getElementById('modal-bookdate').textContent    = btn.dataset.bookdate;
             document.getElementById('modal-notes').textContent       = btn.dataset.notes || '—';
             document.getElementById('modal-createdat').textContent   = btn.dataset.createdat;
+
+            // Type field
+            var bType = btn.dataset.type || 'ordinary';
+            document.getElementById('modal-type').textContent = typeLabels[bType] || bType;
+
+            // Selected tours (spouses program)
+            var toursRow = document.getElementById('modal-tours-row');
+            var toursVal = btn.dataset.selectedtours || '';
+            if (toursVal) {
+                document.getElementById('modal-selectedtours').textContent = toursVal.replace(/ \| /g, '\n');
+                toursRow.style.display = 'flex';
+            } else {
+                toursRow.style.display = 'none';
+            }
+
             modal.show();
         });
     });

@@ -11,6 +11,7 @@ if (file_exists(__DIR__ . '/maintenance.flag')) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Arab Congress – Official organizer of ISPN Conference tourism services in Egypt.">
   <title>Arab Congress – Come To Egypt</title>
+  <link rel="icon" type="image/png" href="assets/Cairo/Arab Congress 3D.png.png">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,9 +23,9 @@ if (file_exists(__DIR__ . '/maintenance.flag')) {
 <!-- ===== NAVBAR ===== -->
 <nav class="navbar navbar-dark fixed-top" id="mainNav">
   <div class="container-fluid px-4 d-flex align-items-center justify-content-between">
-    <!-- <a class="navbar-brand p-0" href="#">
-      <img src="assets/Cairo/Arab Congress white.png" alt="Arab Congress" height="44">
-    </a> -->
+    <a class="navbar-brand p-0" href="#">
+      <!-- <img src="assets/Cairo/Arab Congress white.png" alt="Arab Congress" height="44"> -->
+    </a>
     <div class="d-none d-md-flex align-items-center gap-3">
       <a href="mailto:arabcongress.co@gmail.com" class="nav-email">arabcongress.co@gmail.com</a>
       <a href="https://wa.me/message/56PURZNDQBU6N1" target="_blank" rel="noopener" class="btn btn-outline-light btn-sm px-3">WhatsApp</a>
@@ -104,6 +105,34 @@ if (file_exists(__DIR__ . '/maintenance.flag')) {
            role="button" tabindex="0" aria-label="Explore Egypt's Coastal Gems"
            onkeydown="if(event.key==='Enter')openModal('coastal')">
         <img src="assets/coastal gems/Coastal GEMS.png.png" alt="Coastal Gems" class="city-img">
+        <div class="city-brand"><img src="assets/Cairo/Arab Congress 3D.png.png" alt=""></div>
+        <div class="city-hover-text">Click to Explore</div>
+      </div>
+
+      <!-- SPOUSES & PARTNERS PROGRAM -->
+      <div class="city-card special-card spouses-card" onclick="openModal('spouses')"
+           role="button" tabindex="0" aria-label="Spouses and Partners Program"
+           onkeydown="if(event.key==='Enter')openModal('spouses')">
+        <div class="city-overlay"></div>
+        <div class="special-card-inner">
+          <span class="special-card-label">Special Program</span>
+          <div class="special-card-title">Spouses &amp;<br>Partners</div>
+          <div class="special-card-sub">Program</div>
+        </div>
+        <div class="city-brand"><img src="assets/Cairo/Arab Congress 3D.png.png" alt=""></div>
+        <div class="city-hover-text">Click to Explore</div>
+      </div>
+
+      <!-- CONFERENCE TOUR -->
+      <div class="city-card special-card conference-card" onclick="openModal('conference')"
+           role="button" tabindex="0" aria-label="Conference Tour October 9th"
+           onkeydown="if(event.key==='Enter')openModal('conference')">
+        <div class="city-overlay"></div>
+        <div class="special-card-inner">
+          <span class="special-card-label">Conference Excursion</span>
+          <div class="special-card-title">Conference<br>Tour</div>
+          <div class="special-card-sub">October 9th</div>
+        </div>
         <div class="city-brand"><img src="assets/Cairo/Arab Congress 3D.png.png" alt=""></div>
         <div class="city-hover-text">Click to Explore</div>
       </div>
@@ -636,6 +665,223 @@ if (file_exists(__DIR__ . '/maintenance.flag')) {
                   <div class="col-12 col-md-6">
                     <label class="form-label">Preferred Date <span class="required">*</span></label>
                     <input type="date" name="date" class="form-control booking-input" required>
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label">Notes / Special Requests</label>
+                    <textarea name="notes" class="form-control booking-input" rows="4" placeholder="Any special requests..."></textarea>
+                  </div>
+                  <div class="col-12 text-center pt-2">
+                    <button type="submit" class="btn-submit">
+                      <span class="btn-label">Submit Booking</span>
+                      <span class="btn-spinner d-none"><span class="spinner-border spinner-border-sm me-2"></span>Sending...</span>
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SPOUSES & PARTNERS MODAL -->
+<div id="spousesModal" class="dest-modal" role="dialog" aria-modal="true" aria-label="Spouses and Partners Program">
+  <button class="modal-close-btn" onclick="closeAllModals()" aria-label="Close">&#10005;</button>
+  <div class="dest-modal-inner">
+
+    <!-- Hero -->
+    <div class="spouses-hero">
+      <div class="special-hero-overlay"></div>
+      <h1 class="special-hero-title">SPOUSES &amp; PARTNERS</h1>
+      <p class="special-hero-sub">Program</p>
+      <div class="modal-brand"><img src="assets/Cairo/Arab Congress 3D.png.png" alt="Arab Congress"></div>
+      <div class="modal-scroll-hint"><span>Scroll to explore</span><div class="scroll-arrow">&#8595;</div></div>
+    </div>
+
+    <!-- Tour Selection -->
+    <div class="tour-select-section">
+      <div class="text-center mb-2">
+        <h2 class="tour-select-heading">Select Your Tours</h2>
+        <p class="tour-select-note">Oct. 9 Conference Tour is mandatory for all attendees</p>
+      </div>
+      <div class="tour-cards-grid">
+
+        <!-- Oct 7 -->
+        <label class="tour-select-card" for="tour_oct7">
+          <div class="tour-select-card-body">
+            <span class="tour-date-badge">Oct 7</span>
+            <div class="tour-name">National Museum of Egyptian Civilization</div>
+            <div class="tour-desc">A journey through Egyptian history.</div>
+          </div>
+          <input id="tour_oct7" type="checkbox" name="selected_tours[]" value="Oct 7 – National Museum" class="tour-checkbox" form="spousesForm">
+        </label>
+
+        <!-- Oct 8 -->
+        <label class="tour-select-card" for="tour_oct8">
+          <div class="tour-select-card-body">
+            <span class="tour-date-badge">Oct 8</span>
+            <div class="tour-name">Nile Dinner Cruise</div>
+            <div class="tour-desc">An evening of dining and folklore on the Nile.</div>
+          </div>
+          <input id="tour_oct8" type="checkbox" name="selected_tours[]" value="Oct 8 – Nile Dinner Cruise" class="tour-checkbox" form="spousesForm">
+        </label>
+
+        <!-- Oct 9 – Mandatory -->
+        <label class="tour-select-card mandatory" for="tour_oct9_display">
+          <div class="tour-select-card-body">
+            <span class="tour-date-badge">Oct 9</span>
+            <div class="tour-name">Conference Tour</div>
+            <div class="tour-desc">Joining the main conference excursion.</div>
+            <span class="tour-mandatory-badge">Mandatory</span>
+          </div>
+          <input id="tour_oct9_display" type="checkbox" class="tour-checkbox" checked disabled aria-hidden="true">
+        </label>
+        <!-- Hidden input always submits the mandatory Oct 9 value -->
+        <input type="hidden" name="selected_tours[]" value="Oct 9 – Conference Tour (Mandatory)" form="spousesForm">
+
+        <!-- Oct 10 -->
+        <label class="tour-select-card" for="tour_oct10">
+          <div class="tour-select-card-body">
+            <span class="tour-date-badge">Oct 10</span>
+            <div class="tour-name">Salah El-Din Citadel</div>
+            <div class="tour-desc">Exploring Islamic Cairo and the Alabaster Mosque.</div>
+          </div>
+          <input id="tour_oct10" type="checkbox" name="selected_tours[]" value="Oct 10 – Salah El-Din Citadel" class="tour-checkbox" form="spousesForm">
+        </label>
+
+      </div>
+    </div>
+
+    <!-- Booking Form -->
+    <div class="modal-form-section">
+      <div class="container">
+        <h2 class="section-title text-center">Register for the Program</h2>
+        <p class="form-sub text-center">Complete your registration below</p>
+        <div class="row justify-content-center">
+          <div class="col-12 col-lg-8 col-xl-7">
+            <div class="form-card">
+              <div class="form-msg d-none alert mb-4" role="alert"></div>
+              <form id="spousesForm" class="dest-booking-form" data-form-type="spouses" novalidate>
+                <input type="hidden" name="type" value="spouses_program">
+                <input type="hidden" name="destination" value="Spouses &amp; Partners Program">
+                <div class="row g-4">
+                  <div class="col-12 col-md-6">
+                    <label class="form-label">Full Name <span class="required">*</span></label>
+                    <input type="text" name="full_name" class="form-control booking-input" placeholder="Enter your full name" required autocomplete="name">
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label">Mobile Number <span class="required">*</span></label>
+                    <input type="tel" name="mobile" class="form-control booking-input" placeholder="+20 XXX XXX XXXX" required autocomplete="tel">
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label">Email Address <span class="required">*</span></label>
+                    <input type="email" name="email" class="form-control booking-input" placeholder="your@email.com" required autocomplete="email">
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label">Notes / Special Requests</label>
+                    <textarea name="notes" class="form-control booking-input" rows="4" placeholder="Any special requests..."></textarea>
+                  </div>
+                  <div class="col-12 text-center pt-2">
+                    <button type="submit" class="btn-submit">
+                      <span class="btn-label">Submit Registration</span>
+                      <span class="btn-spinner d-none"><span class="spinner-border spinner-border-sm me-2"></span>Sending...</span>
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- CONFERENCE TOUR MODAL -->
+<div id="conferenceModal" class="dest-modal" role="dialog" aria-modal="true" aria-label="Conference Tour October 9th">
+  <button class="modal-close-btn" onclick="closeAllModals()" aria-label="Close">&#10005;</button>
+  <div class="dest-modal-inner">
+
+    <!-- Hero -->
+    <div class="conference-hero">
+      <div class="special-hero-overlay"></div>
+      <h1 class="special-hero-title">CONFERENCE TOUR</h1>
+      <p class="special-hero-sub">October 9th, 2024</p>
+      <div class="modal-brand"><img src="assets/Cairo/Arab Congress 3D.png.png" alt="Arab Congress"></div>
+      <div class="modal-scroll-hint"><span>Scroll to explore</span><div class="scroll-arrow">&#8595;</div></div>
+    </div>
+
+    <!-- Tour Options -->
+    <div class="conf-options-section">
+      <div class="text-center mb-2">
+        <h2 class="conf-options-heading">Choose Your Tour</h2>
+      </div>
+      <div class="conf-options-note mx-auto">Please select only one tour option for this day.</div>
+      <div class="conf-options-grid">
+
+        <!-- Option 1: Giza Pyramids & Sphinx -->
+        <div class="conf-option-card">
+          <label for="opt1" style="display:block;cursor:pointer;margin:0;">
+            <img src="assets/Cairo/Pyramids.webp" alt="Giza Pyramids" class="conf-option-img">
+            <div class="conf-option-body">
+              <div class="conf-option-title">Giza Pyramids &amp; Sphinx</div>
+              <span class="conf-time-badge">10:00 AM – 1:00 PM</span>
+              <p class="conf-option-desc">Visit the Great Pyramids (Khufu, Khafre, Menkaure) and the Sphinx, followed by lunch.</p>
+              <div class="conf-option-radio-row">
+                <input type="radio" name="conf_tour_option" value="Giza Pyramids &amp; Sphinx" id="opt1" form="conferenceForm">
+                <label for="opt1">Select this option</label>
+              </div>
+            </div>
+          </label>
+        </div>
+
+        <!-- Option 2: Grand Egyptian Museum -->
+        <div class="conf-option-card">
+          <label for="opt2" style="display:block;cursor:pointer;margin:0;">
+            <img src="assets/Cairo/G.E.M.jpg" alt="Grand Egyptian Museum" class="conf-option-img">
+            <div class="conf-option-body">
+              <div class="conf-option-title">The Grand Egyptian Museum</div>
+              <span class="conf-time-badge">11:00 AM – 1:00 PM</span>
+              <p class="conf-option-desc">A guided tour inside the world's largest archaeological museum, followed by lunch.</p>
+              <div class="conf-option-radio-row">
+                <input type="radio" name="conf_tour_option" value="Grand Egyptian Museum (GEM)" id="opt2" form="conferenceForm">
+                <label for="opt2">Select this option</label>
+              </div>
+            </div>
+          </label>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Booking Form -->
+    <div class="modal-form-section">
+      <div class="container">
+        <h2 class="section-title text-center">Book Your Conference Tour</h2>
+        <p class="form-sub text-center">October 9th – Select your preferred excursion above</p>
+        <div class="row justify-content-center">
+          <div class="col-12 col-lg-8 col-xl-7">
+            <div class="form-card">
+              <div class="form-msg d-none alert mb-4" role="alert"></div>
+              <form id="conferenceForm" class="dest-booking-form" data-form-type="conference" novalidate>
+                <input type="hidden" name="type" value="conference_tour">
+                <input type="hidden" name="destination" value="">
+                <div class="row g-4">
+                  <div class="col-12 col-md-6">
+                    <label class="form-label">Full Name <span class="required">*</span></label>
+                    <input type="text" name="full_name" class="form-control booking-input" placeholder="Enter your full name" required autocomplete="name">
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label">Mobile Number <span class="required">*</span></label>
+                    <input type="tel" name="mobile" class="form-control booking-input" placeholder="+20 XXX XXX XXXX" required autocomplete="tel">
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label">Email Address <span class="required">*</span></label>
+                    <input type="email" name="email" class="form-control booking-input" placeholder="your@email.com" required autocomplete="email">
                   </div>
                   <div class="col-12">
                     <label class="form-label">Notes / Special Requests</label>
